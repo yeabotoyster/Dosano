@@ -45,7 +45,7 @@ print "\n===============================";
 print "\n[~] Enter Protockol (TCP or UDP) :"; # Set Protockol;
 $proto = <STDIN>;
 chomp ($proto);
-while ($proto eq ""){
+while ($proto eq "" || !grep{$proto eq $_} 'TCP','UDP','tcp','udp'){
  print "   [!] Enter Protockol (TCP or UDP) ?: ";
  $proto = <STDIN>;
  chomp ($proto);
@@ -54,7 +54,7 @@ print "Protocol ==> $proto";
 print "\n===============================";
 sleep(2);
 system("clear || cls");
-print "\n[*]Attack Has Been Start On [$host:$port] proto => [$proto].......\n\n";
+print "\n[*] Attack Has Been Start On [$host:$port] proto => [$proto].......\n\n";
 sleep(3);
 
 {
