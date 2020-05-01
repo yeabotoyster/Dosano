@@ -2,7 +2,7 @@
 #==============INFO==============#
 # SCRIPT: Dosano
 #    JOB: Denial Of Service Attack[DosAttack]
-#CodedBy: Oseid Aldary
+#CodedBy:envixed
 
 #=== Use Modules ===#
 use IO::Socket;
@@ -14,17 +14,17 @@ system("cls || clear");
 print q{ 
                    .-"      "-.  
                   /            \ 
-                 |    JOKER11   | 
+                 |    SKIDZZ    | 
                  |,  .-.  .-.  ,| 
                  | )(__/  \__)( | 
                  |/     /\     \| 
        (@_       (_     ^^     _) 
   _     ) \_______\__|IIIIII|__/__________________________ 
- (_)@8@8{}<________|-\IIIIII/-|_A_N_O_N_Y_M_O_U_S_A_R_A_B_> 
+ (_)@8@8{}<________|-\IIIIII/-|_B_O_O_T_E_D_B_Y_E_W_I_F_I_> 
         )_/        \          / 
        (@           `--------` Welcome! 
 
- [---]   by:> OSEID ALDARY   [---]
+ [---]   by:>  envixed  [---]
 };
 # Check Intenret Connection !
 my $check = IO::Socket::INET->new( 'PeerAddr'=>'www.google.com', 
@@ -110,6 +110,6 @@ $sock->close()
 #####################  END OF SCRIPT #########################
 #####################                #########################
 ##############################################################
-#This Script by Oseid Aldary
-#Have a nice day :)
-#GoodBye
+#This Script by envixed
+#Say Bye To Wifi :)
+#envixed fucked u up
